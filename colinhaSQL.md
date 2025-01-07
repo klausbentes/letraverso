@@ -105,3 +105,20 @@ WHERE id IN (
     )
 );
 ```
+
+## Para achar as músicas associadas a mais de uma obra
+
+```sql
+SELECT 
+    m.id AS musica_id,
+    m.titulo AS musica_titulo,
+    COUNT(mo.obra_id) AS numero_de_obras
+FROM 
+    Musica m
+JOIN 
+    MusicaObra mo ON m.id = mo.musica_id
+GROUP BY 
+    m.id, m.titulo
+HAVING 
+    COUNT(mo.obra_id) > 1;
+```
